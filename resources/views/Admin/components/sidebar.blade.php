@@ -7,17 +7,13 @@
             <i class="fa-solid fa-house"></i>
             <span class="ml-3">Home</span>
         </a>
-        <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800">
+        <a href="{{ route('admin.leads.index') }}" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800">
             <i class="fa-solid fa-user-plus w-5"></i>
             <span class="ml-3">Leads</span>
         </a>
         <a href="{{ route('admin.users.index') }}" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800">
             <i class="fa-solid fa-users w-5"></i>
             <span class="ml-3">Usuarios</span>
-        </a>
-        <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800">
-            <i class="fa-solid fa-headset w-5"></i>
-            <span class="ml-3">Operadores</span>
         </a>
         <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800">
             <i class="fa-solid fa-chart-line w-5"></i>

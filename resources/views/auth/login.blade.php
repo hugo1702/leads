@@ -1,11 +1,11 @@
 @extends('layouts.auth.app')
 @section('content')
-        <x-notification session="success" />
+    {{-- <x-notification session="success" />
     @if ($errors->any())
         @foreach ($errors->all() as $error)
             <x-notification type="error" :message="$error" />
         @endforeach
-    @endif
+    @endif --}}
     <section>
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 animate-slide-in-left">
 
@@ -13,16 +13,17 @@
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <div class="flex flex-col items-center justify-center>">
                         <a href="#" class="flex items-center space-x-1">
-                        <img src="/assets/images/logo.png" alt="Logo" class="h-8 w-8 object-contain" />
-                        <span class="text-2xl font-bold text-white">Leads</span>
-                    </a>
+                            <img src="/assets/images/logo.png" alt="Logo" class="h-8 w-8 object-contain" />
+                            <span class="text-2xl font-bold text-white">Leads</span>
+                        </a>
                     </div>
 
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl ">Iniciar sesión </h1>
                     <form method="POST" action="{{ route('login.store') }}" class="space-y-4 md:space-y-6">
                         @csrf
                         <div>
-                            <label for="user_name" class="block mb-2 text-sm font-medium text-white">Nombre de usuario</label>
+                            <label for="user_name" class="block mb-2 text-sm font-medium text-white">Nombre de
+                                usuario</label>
                             <input type="text" name="user_name" id="user_name"
                                 class=" text-white rounded-lg block w-full p-2.5  bg-white/20 backdrop-blur-xs"
                                 placeholder="usuario1234" required="">
@@ -33,6 +34,20 @@
                                 class=" text-white rounded-lg block w-full p-2.5  bg-white/20 backdrop-blur-xs"
                                 required="">
                         </div>
+
+                        @if (session('success'))
+                            <div class="mb-4 text-green-500 bg-green-100 border border-green-400 px-4 py-2 rounded">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if ($errors->any())
+                            <div class="mb-4 text-red-500 font-semibold text-center px-4 py-2 rounded">
+                                    @foreach ($errors->all() as $error)
+                                        {{ $error }}
+                                    @endforeach
+                            </div>
+                        @endif
                         <div class="flex items-center justify-between">
                             <div class="flex items-start">
                                 <div class="flex items-center h-5">

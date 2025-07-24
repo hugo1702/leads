@@ -24,6 +24,11 @@ class LoginController extends Controller
 
             $user = Auth::user();
 
+            if($user->active !=1) {
+                Auth::logout();
+                return back()->withErrors(['user_name' => 'Tu cuenta esta inactiva']);
+            }
+
             if ($user->role === 'admin') {
                 return redirect()->route('admin.dashboard')->with('success', 'Inicio de sesión exitoso como administrador');
             } elseif ($user->role === 'operador') {
