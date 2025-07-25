@@ -1,11 +1,11 @@
 @extends('layouts.auth.app')
 @section('content')
-    {{-- <x-notification session="success" />
+    <x-notification session="success" />
     @if ($errors->any())
         @foreach ($errors->all() as $error)
             <x-notification type="error" :message="$error" />
         @endforeach
-    @endif --}}
+    @endif
     <section>
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 animate-slide-in-left">
 
@@ -34,20 +34,6 @@
                                 class=" text-white rounded-lg block w-full p-2.5  bg-white/20 backdrop-blur-xs"
                                 required="">
                         </div>
-
-                        @if (session('success'))
-                            <div class="mb-4 text-green-500 bg-green-100 border border-green-400 px-4 py-2 rounded">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        @if ($errors->any())
-                            <div class="mb-4 text-red-500 font-semibold text-center px-4 py-2 rounded">
-                                    @foreach ($errors->all() as $error)
-                                        {{ $error }}
-                                    @endforeach
-                            </div>
-                        @endif
                         <div class="flex items-center justify-between">
                             <div class="flex items-start">
                                 <div class="flex items-center h-5">

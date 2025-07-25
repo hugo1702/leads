@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OperatorController;
+use App\Http\Controllers\OperatorLeadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Admin
 */
 Route::middleware(['auth'])->group(function () {
+    //AdminController
     Route::get('/admin/dashboard', [AdminController::class, 'show'])->name('admin.dashboard');
 
     //UserController
@@ -28,9 +30,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
     Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
 
+    // LeadController
     Route::get('admin/leads/index', [LeadController::class, 'index'])->name('admin.leads.index');
     Route::get('/admin/leads/create', [LeadController::class, 'create'])->name('admin.leads.create');
     Route::post('/admin/leads/store', [LeadController::class, 'store'])->name('admin.lead.store');
+    Route::get('/admin/leads/{lead}/edit', [LeadController::class, 'edit'])->name('admin.leads.edit');
+    Route::put('/admin/leads/{lead}', [LeadController::class, 'update'])->name('admin.leads.update');
+    Route::delete('/admin/leads/{id}', [LeadController::class, 'destroy'])->name('admin.leads.destroy');
+    Route::get('/admin/leads/export-pdf', [LeadController::class, 'exportpdf'])->name('admin.leads.exportpdf');
+
 });
 
 /*
@@ -38,3 +46,5 @@ Route::middleware(['auth'])->group(function () {
 */
 
 Route::get('/operator/dashboard', [OperatorController::class, 'show'])->name('operator.dashboard');
+Route::get('/operator/leads/index', [OperatorLeadController::class, 'index'])->name('operator.leads.index');
+Route::post('/operator/leads/{id}/changestatus', [OperatorLeadController::class, 'changestatus']) ->name('operator.leads.changestatus');

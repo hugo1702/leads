@@ -15,7 +15,7 @@
             <i class="fa-solid fa-users w-5"></i>
             <span class="ml-3">Usuarios</span>
         </a>
-        <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800">
+        <a href="{{ route('admin.leads.exportpdf') }}" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800">
             <i class="fa-solid fa-chart-line w-5"></i>
             <span class="ml-3">Reportes</span>
         </a>

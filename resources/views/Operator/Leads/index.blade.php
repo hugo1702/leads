@@ -1,6 +1,6 @@
-@extends('admin.layouts.app')
+@extends('operator.layouts.app')
 
-@section('title', 'Lista de Leads')
+@section('title', 'Inicio')
 
 @section('content')
     <div class="w-full mx-auto px-4 sm:px-6 py-4">
@@ -8,23 +8,16 @@
             <h1 class="text-3xl font-bold text-gray-700">Leads</h1>
 
             <div class="flex items-center gap-4">
-                <form method="GET" action="{{ route('admin.leads.index') }}" class="flex items-center gap-2">
+                <form method="GET" action="{{ route('operator.leads.index') }}" class="flex items-center gap-2">
                     <label for="status" class="text-sm font-semibold text-gray-700 whitespace-nowrap">Filtrar por
                         estado:</label>
                     <select name="status" id="status" onchange="this.form.submit()"
                         class="px-3 py-2 border-gray-700 rounded-md font-semibold text-sm text-gray-700 focus:outline-none ">
-                        <option value="">Todos</option>
                         <option value="abierto" {{ request('status') == 'abierto' ? 'selected' : '' }}>Abierto</option>
-                        <option value="pendiente" {{ request('status') == 'pendiente' ? 'selected' : '' }}>Pendiente
-                        </option>
                         <option value="cerrado" {{ request('status') == 'cerrado' ? 'selected' : '' }}>Cerrado</option>
                     </select>
                 </form>
 
-                <a href="{{ route('admin.leads.create') }}"
-                    class="bg-green-600 text-sm flex items-center gap-2 text-white px-4 py-2 rounded-md shadow hover:bg-green-700 transition duration-200">
-                    <i class="fa fa-plus"></i> Insertar
-                </a>
             </div>
         </div>
     </div>
@@ -55,6 +48,7 @@
                                     $statusColors = [
                                         'abierto' => 'bg-green-100 text-green-700',
                                         'cerrado' => 'bg-red-100 text-red-700',
+                                        'pendiente' => 'bg-yellow-100 text-yellow-700',
                                     ];
                                     $color = $statusColors[strtolower($lead->status)] ?? 'bg-gray-100 text-gray-700';
                                 @endphp
@@ -69,19 +63,32 @@
                                     class="inline-block bg-yellow-500 hover:bg-yellow-700 text-white px-2 py-2 rounded-md transition-colors duration-200">
                                     <i class="fa fa-eye"></i>
                                 </button>
-                                <a href="{{ route('admin.leads.edit', $lead->id) }}"
-                                    class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-2 py-2 rounded-md transition-colors duration-200">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <form action="{{ route('admin.leads.destroy', $lead->id) }}" method="POST"
-                                    onsubmit="return confirm('¿Estás seguro de eliminar este lead?');" class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="bg-red-600 hover:bg-red-700 text-white px-2 py-2 rounded-md transition-colors duration-200">
-                                        <i class="fa fa-delete-left"></i>
+                                @php
+                                    $statusActual = strtolower($lead->status);
+                                    $siguienteStatus = match ($statusActual) {
+                                        'abierto' => 'cerrado',
+                                        'cerrado' => null,
+                                        default => 'abierto',
+                                    };
+                                @endphp
+
+                                @if ($siguienteStatus)
+                                    <form method="POST" action="{{ route('operator.leads.changestatus', $lead->id) }}"
+                                        class="inline-block">
+                                        @csrf
+                                        <button type="submit"
+                                            class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-2 rounded-md transition-colors duration-200"
+                                            title="Cambiar a {{ ucfirst($siguienteStatus) }}">
+                                            <i class="fa fa-sync-alt mr-1"></i> {{ ucfirst($siguienteStatus) }}
+                                        </button>
+                                    </form>
+                                @else
+                                    <button type="button"
+                                        class="bg-gray-400 text-white px-2 py-2 rounded-md cursor-not-allowed opacity-70"
+                                        disabled title="El lead ya está cerrado">
+                                        <i class="fa fa-lock mr-1"></i> Cerrado
                                     </button>
-                                </form>
+                                @endif
 
                             </td>
                         </tr>

@@ -49,18 +49,7 @@
                                 placeholder="correo@ejemplo.com">
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="space-y-1">
-                                <label for="role" class="flex items-center text-sm font-semibold text-gray-700">
-                                    Rol
-                                </label>
-                                <select name="role" id="role" required
-                                    class="w-full px-4 py-3 rounded-lg border text-sm border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 bg-gray-50 focus:bg-white">
-                                    <option value="">Seleccione un rol</option>
-                                    <option value="operador">Operador</option>
-                                    <option value="admin">Administrador</option>
-                                </select>
-                            </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                             <div class="space-y-1">
                                 <label for="participate_assignment"

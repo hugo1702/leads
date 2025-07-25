@@ -14,13 +14,14 @@
 
     <div class="flex">
         @include('operator.components.sidebar')
-        <div id="overlay" class="fixed inset-0 z-40 bg-black bg-opacity-50 hidden lg:hidden"></div>
-        <div class="flex-1 lg:ml-64">
-            <main class="px-4 py-2">
+        <div id="overlay" class="fixed inset-0 z-40 hidden lg:hidden"></div>
+        <div class="flex-1 lg:ml-64 overflow-auto max-h-screen">
+            <main class="px-4 py-2 min-w-[320px]">
                 @yield('content')
             </main>
         </div>
     </div>
+
 
 
     <script>

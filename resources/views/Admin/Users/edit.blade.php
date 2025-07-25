@@ -45,19 +45,7 @@
                                 value="{{ old('email', $user->email) }}">
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="space-y-1">
-                                <label for="role" class="text-sm font-semibold text-gray-700">Rol</label>
-                                <select name="role" id="role" required
-                                    class="w-full px-4 py-3 rounded-lg border text-sm border-gray-300">
-                                    <option value="operador" {{ old('role', $user->role) == 'operador' ? 'selected' : '' }}>
-                                        Operador
-                                    </option>
-                                    <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>
-                                        Administrador
-                                    </option>
-                                </select>
-                            </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                             <div class="space-y-1">
                                 <label for="participate_assignment"

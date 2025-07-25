@@ -8,24 +8,24 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    // public function show()
-    // {
-    //     return view('admin.users.index');
-    // }
 
     public function index()
     {
         $filtroInactivos = request('inactivos');
+        $filtroRol = request('role');
+
         $users = User::when($filtroInactivos, function ($query) {
             return $query->where('active', 0);
         }, function ($query) {
             return $query->where('active', 1);
-        })->paginate(8);
+        })
+            ->when($filtroRol, function ($query, $filtroRol) {
+                return $query->where('role', $filtroRol);
+            })
+            ->paginate(8);
 
         return view('admin.users.index', compact('users'));
     }
-
-
 
     public function create()
     {
@@ -39,7 +39,6 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'user_name' => 'required|string|max:255|unique:users,user_name',
             'email' => 'required|email|unique:users,email',
-            'role' => 'required|in:operador,admin',
             'participate_assignment' => 'required|boolean',
             'active' => 'required|boolean',
             'password' => 'required|string|min:8|confirmed',
@@ -49,7 +48,7 @@ class UserController extends Controller
         $user->name = $validated['name'];
         $user->user_name = $validated['user_name'];
         $user->email = $validated['email'];
-        $user->role = $validated['role'];
+        $user->role = 'operador';
         $user->participate_assignment = $validated['participate_assignment'];
         $user->active = $validated['active'];
         $user->password = Hash::make($validated['password']);
@@ -67,14 +66,12 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'role' => 'required|in:operador,admin',
             'participate_assignment' => 'required|boolean',
             'active' => 'required|boolean',
             'password' => 'nullable|string|min:8|confirmed',
         ]);
 
         $user->name = $validated['name'];
-        $user->role = $validated['role'];
         $user->participate_assignment = $validated['participate_assignment'];
         $user->active = $validated['active'];
 
