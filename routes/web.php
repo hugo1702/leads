@@ -6,12 +6,16 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\OperatorLeadController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
 /*
     Login
 */
+
+Route::get('/', function() { return view('welcome');
+});
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -19,9 +23,10 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 /*
     Admin
 */
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', RoleMiddleware::class . ':admin'])->group(function () {
     //AdminController
     Route::get('/admin/dashboard', [AdminController::class, 'show'])->name('admin.dashboard');
+    Route::get('/admin/profile', [AdminController::class, 'showOperator'])->name('admin.users.profile');
 
     //UserController
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
@@ -38,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/leads/{lead}', [LeadController::class, 'update'])->name('admin.leads.update');
     Route::delete('/admin/leads/{id}', [LeadController::class, 'destroy'])->name('admin.leads.destroy');
     Route::get('/admin/leads/export-pdf', [LeadController::class, 'exportpdf'])->name('admin.leads.exportpdf');
+    Route::get('/admin/reports/grap', [LeadController::class, 'vistaGraficaLeads'])->name('admin.reports.grap');
 
 });
 
@@ -45,6 +51,9 @@ Route::middleware(['auth'])->group(function () {
     Operator
 */
 
-Route::get('/operator/dashboard', [OperatorController::class, 'show'])->name('operator.dashboard');
-Route::get('/operator/leads/index', [OperatorLeadController::class, 'index'])->name('operator.leads.index');
-Route::post('/operator/leads/{id}/changestatus', [OperatorLeadController::class, 'changestatus']) ->name('operator.leads.changestatus');
+Route::middleware(['auth', RoleMiddleware::class . ':operador'])->group(function () {
+    Route::get('/operator/dashboard', [OperatorController::class, 'show'])->name('operator.dashboard');
+    Route::get('/operator/leads/index', [OperatorLeadController::class, 'index'])->name('operator.leads.index');
+    Route::post('/operator/leads/{id}/changestatus', [OperatorLeadController::class, 'changestatus'])->name('operator.leads.changestatus');
+    Route::get('/operator/profile', [OperatorController::class, 'showOperator'])->name('operator.users.profile');
+});

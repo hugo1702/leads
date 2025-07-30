@@ -42,13 +42,13 @@
             <table class="min-w-max divide-y divide-gray-200 w-full">
                 <thead class="bg-gray-100 text-left ">
                     <tr>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Nombre</th>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Email</th>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Rol</th>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Usuario</th>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Asignación</th>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Estado</th>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Acciones</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">NOMBRE</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">CORREO</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">ROL</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">USUARIO</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">ASIGNACIÓN</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">ESTADO</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 text-left">

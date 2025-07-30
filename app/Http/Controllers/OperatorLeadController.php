@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\LeadModel;
 use Illuminate\Http\Request;
 
+/**
+ * Controlador para que los operadores gestionen sus leads asignados.
+ */
 class OperatorLeadController extends Controller
 {
+
+    /*
+    Muestra la lista de leads asignados al operador autenticado,
+    con opción a filtrar por estado (abierto o cerrado).
+    */
     public function index(Request $request)
     {
         $query = LeadModel::with(['assignedTo', 'createdBy'])
@@ -20,6 +28,8 @@ class OperatorLeadController extends Controller
         return view('operator.leads.index', compact('leads'));
     }
 
+    /*Cambia el estado de un lead asignado (de abierto a cerrado o viceversa).
+    Si se cierra el lead, se registra la fecha de cierre (`end_date`)*/
     public function changestatus($id)
     {
         $lead = LeadModel::findOrFail($id);

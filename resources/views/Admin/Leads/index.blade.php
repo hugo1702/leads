@@ -15,8 +15,6 @@
                         class="px-3 py-2 border-gray-700 rounded-md font-semibold text-sm text-gray-700 focus:outline-none ">
                         <option value="">Todos</option>
                         <option value="abierto" {{ request('status') == 'abierto' ? 'selected' : '' }}>Abierto</option>
-                        <option value="pendiente" {{ request('status') == 'pendiente' ? 'selected' : '' }}>Pendiente
-                        </option>
                         <option value="cerrado" {{ request('status') == 'cerrado' ? 'selected' : '' }}>Cerrado</option>
                     </select>
                 </form>
@@ -29,17 +27,17 @@
         </div>
     </div>
 
-    <div class="w-full overflow-x-auto">
+    <div class="w-full border">
         <div class="inline-block min-w-full bg-white shadow-md rounded-lg border">
-            <table class="min-w-max divide-y divide-gray-200 w-full">
+            <table class="min-w-max divide-y rounded-lg border divide-gray-200 w-full">
                 <thead class="bg-gray-100 text-left">
                     <tr>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Nombre</th>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Cliente</th>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Valor</th>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Asignado a</th>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Estado</th>
-                        <th class="px-3 py-3 text-sm font-medium text-gray-700">Acciones</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">NOMBRE</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">CLIENTE</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">VALOR</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">ASIGNADO A</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">ESTADO</th>
+                        <th class="px-3 py-3 text-sm font-medium text-gray-700">ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 text-left">
@@ -121,6 +119,9 @@
                     @endforelse
                 </tbody>
             </table>
+        </div>
+        <div class=" bg-white text-gray-800 p-4 rounded-md shadow [&_*]:!bg-white [&_*]:!text-gray-800">
+            {{ $leads->links() }}
         </div>
     </div>
 @endsection

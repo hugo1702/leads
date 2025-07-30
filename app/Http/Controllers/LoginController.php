@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Auth;
 
+/**
+ * Controlador encargado de manejar la autenticación de usuarios.
+ */
 class LoginController extends Controller
 {
+
+    // Muestra la vista del formulario de inicio de sesión.
     public function show() {
         return view('auth.login');
     }
 
-
+    //Procesa el inicio de sesión del usuario.
+    //Valida las credenciales, verifica si el usuario está activo y redirige al dashboard correspondiente según su rol.
     public function store(Request $request)
     {
         $credentials = $request->validate([
@@ -44,6 +50,7 @@ class LoginController extends Controller
         ]);
     }
 
+    //Cierra la sesión del usuario y redirige al login.
     public function logout(Request $request)
     {
         Auth::logout();
@@ -51,7 +58,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login')->with('success', 'Sesión cerrada correctamente');
+        return view('welcome') ->with('success', 'Sesión cerrada correctamente');
     }
 
 }

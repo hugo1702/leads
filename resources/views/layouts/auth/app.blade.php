@@ -10,7 +10,7 @@
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 
-<body class="bg-gray-800 font-sans leading-normal tracking-normal h-screen invisible"
+<body class="bg-gradient-to-br from-gray-900  to-gray-500 font-sans leading-normal tracking-normal h-screen invisible"
     onload="document.body.classList.remove('invisible')">
 
     <div class=" pt-24 ">

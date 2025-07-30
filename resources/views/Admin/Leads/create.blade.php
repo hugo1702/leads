@@ -109,7 +109,7 @@
                             <select name="assigned_to" id="assigned_to"
                                 class="w-full px-3 py-3 text-sm rounded-lg border border-gray-300">
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }} ({{ $user->email }})</option>
+                                    <option value="{{ $user->id }}">{{ $user->name }} ({{ $user->leads_count }})</option>
                                 @endforeach
                             </select>
                         </div>

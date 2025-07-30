@@ -13,7 +13,7 @@
             </div>
             <div class="flex items-center space-x-4">
                 <div class="hidden sm:flex items-center space-x-3">
-                    <a href="{{ route('admin.users.edit', auth()->user()->id) }}"
+                    <a href="{{ route('admin.users.profile')}}"
                         class="hidden sm:flex items-center space-x-3 cursor-pointer hover:text-gray-900">
                         <div class="text-sm text-gray-700">
                             <span class="font-medium">{{ auth()->user()->name ?? 'Usuario' }}</span>
